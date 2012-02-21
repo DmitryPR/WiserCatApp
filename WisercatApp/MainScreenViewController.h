@@ -30,5 +30,6 @@
 
 @property (nonatomic, weak) NSDictionary *coordinateDictionary;
 
+@property (weak, nonatomic) IBOutlet UITextView *locationTextView;
 
 @end

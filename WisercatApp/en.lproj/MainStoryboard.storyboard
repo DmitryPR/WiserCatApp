@@ -78,7 +78,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="xD3-a6-lW8">
-                                <rect key="frame" x="58" y="298" width="204" height="37"/>
+                                <rect key="frame" x="58" y="237" width="204" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Get GPS readings">
@@ -93,44 +93,51 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="UsE-30-AsX">
-                                <rect key="frame" x="98" y="102" width="187" height="31"/>
+                                <rect key="frame" x="98" y="48" width="187" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="zfb-va-VVq">
-                                <rect key="frame" x="98" y="160" width="187" height="31"/>
+                                <rect key="frame" x="98" y="106" width="187" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="oCN-fm-7wE">
-                                <rect key="frame" x="98" y="215" width="187" height="31"/>
+                                <rect key="frame" x="98" y="161" width="187" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="City Name:" lineBreakMode="tailTruncation" minimumFontSize="10" id="zM3-eD-92m">
-                                <rect key="frame" x="6" y="107" width="85" height="21"/>
+                                <rect key="frame" x="6" y="53" width="85" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Time Zone:" lineBreakMode="tailTruncation" minimumFontSize="10" id="M8W-ZS-FwS">
-                                <rect key="frame" x="6" y="165" width="86" height="21"/>
+                                <rect key="frame" x="6" y="111" width="86" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Local Time:" lineBreakMode="tailTruncation" minimumFontSize="10" id="UtM-qq-4IZ">
-                                <rect key="frame" x="6" y="220" width="88" height="21"/>
+                                <rect key="frame" x="6" y="166" width="88" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="mEy-XD-m67">
+                                <rect key="frame" x="40" y="276" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -144,6 +151,7 @@
                     <connections>
                         <outlet property="cityNameTextField" destination="UsE-30-AsX" id="XXG-Af-R5O"/>
                         <outlet property="localTimeTextField" destination="oCN-fm-7wE" id="gxb-Ic-E8W"/>
+                        <outlet property="locationTextView" destination="mEy-XD-m67" id="erA-3i-4lf"/>
                         <outlet property="timezoneTextField" destination="zfb-va-VVq" id="sof-1O-aZl"/>
                     </connections>
                 </viewController>
@@ -178,6 +186,7 @@
                 <relationship kind="action" name="gpsCoordinatesButtonPressed:"/>
                 <relationship kind="outlet" name="cityNameTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="localTimeTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="locationTextView" candidateClass="UITextView"/>
                 <relationship kind="outlet" name="timezoneTextField" candidateClass="UITextField"/>
             </relationships>
         </class>

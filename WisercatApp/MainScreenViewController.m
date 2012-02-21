@@ -11,10 +11,13 @@
 #import "MapViewAnnotaion.h"
 #import <MapKit/MapKit.h>
 
-@interface MainScreenViewController () <UITextFieldDelegate> {
+@interface MainScreenViewController () <UITextFieldDelegate, CLLocationManagerDelegate> {
+    CLLocationManager *loactionManager;
     
 }
 @property (nonatomic, strong) NSMutableArray *annotaionsArray;
+@property (nonatomic, strong) CLLocationManager *locationMagaer;
+@property (nonatomic, strong) CLLocation *currentLocation;
 @end
 
 @implementation MainScreenViewController
@@ -23,8 +26,18 @@
 @synthesize localTimeTextField = _localTimeTextField;
 @synthesize delegate = _delegate;
 @synthesize coordinateDictionary = _coordinateDictionary;
+@synthesize locationTextView = _locationTextView;
 @synthesize annotaionsArray = _annotaionsArray;
+@synthesize locationMagaer = _locationMagaer;
+@synthesize currentLocation = _currentLocation;
 
+
+#pragma mark - Location Delegate 
+-(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
+    self.currentLocation = newLocation;
+    NSString *loactionString = [NSString stringWithFormat:@"%@", self.currentLocation];
+    self.locationTextView.text = loactionString  ;
+}
 
 #pragma mark - Text Field Delegate
 
@@ -36,6 +49,7 @@
 #pragma mark - IBActions
 
 - (IBAction)gpsCoordinatesButtonPressed:(id)sender {
+    
     NSMutableArray *annotations = [[NSMutableArray alloc] init];
     for (NSDictionary *coordinates in self.coordinateDictionary) {
         [annotations addObject:[MapViewAnnotaion annotationForMapView:coordinates]];
@@ -48,6 +62,11 @@
 #pragma mark - System Stuff
 -(void)viewDidLoad {
     [super viewDidLoad];
+    self.locationMagaer = [[CLLocationManager alloc] init];
+    [self.locationMagaer setDistanceFilter:kCLDistanceFilterNone];
+    [self.locationMagaer setDesiredAccuracy:kCLLocationAccuracyBest];
+    [self.locationMagaer stopUpdatingLocation];
+    [self.locationMagaer setDelegate:self];
    
 }
 
@@ -70,6 +89,7 @@
     [self setCityNameTextField:nil];
     [self setTimezoneTextField:nil];
     [self setLocalTimeTextField:nil];
+    [self setLocationTextView:nil];
     [super viewDidUnload];
 }
 
