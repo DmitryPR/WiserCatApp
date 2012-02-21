@@ -7,11 +7,44 @@
 //
 
 #import "GoogleMapViewController.h"
+#import "MainScreenViewController.h"
 
+@interface GoogleMapViewController () <MainScreenViewControllerDelegate> {
+    
+}
+-(void)updateMapView;
+@end
 
 @implementation GoogleMapViewController
 @synthesize mapView = _mapView;
+@synthesize annotationsArray = _annotationsArray;
 
+
+
+#pragma mark - MainScreenDelegate 
+
+-(void)mainScreenDidUpdateTheGpsCoordinates:(MainScreenViewController *)sender {
+    [self updateMapView];
+}
+#pragma mark - Methods 
+-(void)updateMapView {
+    if (self.mapView.annotations) {
+        [self.mapView removeAnnotations:self.mapView.annotations];
+    }
+    if(self.annotationsArray) {
+        [self.mapView addAnnotations:self.annotationsArray];
+    }
+}
+
+#pragma mark - System Stuff
+-(void)setMapView:(MKMapView *)mapView {
+    _mapView = mapView;
+    [self updateMapView];
+}
+
+-(void)setAnnotationsArray:(NSArray *)annotationsArray {
+    _annotationsArray = annotationsArray;
+}
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {

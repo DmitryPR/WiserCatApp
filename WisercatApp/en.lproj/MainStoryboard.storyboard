@@ -78,7 +78,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="xD3-a6-lW8">
-                                <rect key="frame" x="20" y="293" width="280" height="37"/>
+                                <rect key="frame" x="58" y="298" width="204" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Get GPS readings">
@@ -88,6 +88,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="gpsCoordinatesButtonPressed:" destination="0fU-Kk-JHc" eventType="touchUpInside" id="dBf-xA-nR9"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="UsE-30-AsX">
                                 <rect key="frame" x="98" y="102" width="187" height="31"/>
@@ -114,8 +117,8 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="TimeZone:" lineBreakMode="tailTruncation" minimumFontSize="10" id="M8W-ZS-FwS">
-                                <rect key="frame" x="6" y="165" width="82" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Time Zone:" lineBreakMode="tailTruncation" minimumFontSize="10" id="M8W-ZS-FwS">
+                                <rect key="frame" x="6" y="165" width="86" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -138,6 +141,11 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="cityNameTextField" destination="UsE-30-AsX" id="XXG-Af-R5O"/>
+                        <outlet property="localTimeTextField" destination="oCN-fm-7wE" id="gxb-Ic-E8W"/>
+                        <outlet property="timezoneTextField" destination="zfb-va-VVq" id="sof-1O-aZl"/>
+                    </connections>
                 </viewController>
             </objects>
             <point key="canvasLocation" x="525" y="237"/>
@@ -166,6 +174,12 @@
         </class>
         <class className="MainScreenViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MainScreenViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="gpsCoordinatesButtonPressed:"/>
+                <relationship kind="outlet" name="cityNameTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="localTimeTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="timezoneTextField" candidateClass="UITextField"/>
+            </relationships>
         </class>
         <class className="WisercatViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/WisercatViewController.h"/>

@@ -12,5 +12,5 @@
 @interface GoogleMapViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
-
+@property (nonatomic, strong) NSArray *annotationsArray; // MKAnnotaion
 @end
