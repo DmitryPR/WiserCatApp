@@ -1,0 +1,445 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2429E8A814F43E10009662F3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2429E8A714F43E10009662F3 /* UIKit.framework */; };
+		2429E8AA14F43E10009662F3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2429E8A914F43E10009662F3 /* Foundation.framework */; };
+		2429E8AC14F43E10009662F3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2429E8AB14F43E10009662F3 /* CoreGraphics.framework */; };
+		2429E8B214F43E10009662F3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2429E8B014F43E10009662F3 /* InfoPlist.strings */; };
+		2429E8B414F43E10009662F3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2429E8B314F43E10009662F3 /* main.m */; };
+		2429E8B814F43E10009662F3 /* WisercatAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2429E8B714F43E10009662F3 /* WisercatAppDelegate.m */; };
+		2429E8BB14F43E10009662F3 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2429E8B914F43E10009662F3 /* MainStoryboard.storyboard */; };
+		2429E8BE14F43E10009662F3 /* WisercatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2429E8BD14F43E10009662F3 /* WisercatViewController.m */; };
+		2429E8C614F43E10009662F3 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2429E8C514F43E10009662F3 /* SenTestingKit.framework */; };
+		2429E8C714F43E10009662F3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2429E8A714F43E10009662F3 /* UIKit.framework */; };
+		2429E8C814F43E10009662F3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2429E8A914F43E10009662F3 /* Foundation.framework */; };
+		2429E8D014F43E10009662F3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2429E8CE14F43E10009662F3 /* InfoPlist.strings */; };
+		2429E8D314F43E10009662F3 /* WisercatAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2429E8D214F43E10009662F3 /* WisercatAppTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2429E8C914F43E10009662F3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2429E89A14F43E10009662F3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2429E8A214F43E10009662F3;
+			remoteInfo = WisercatApp;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2429E8A314F43E10009662F3 /* WisercatApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WisercatApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2429E8A714F43E10009662F3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		2429E8A914F43E10009662F3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		2429E8AB14F43E10009662F3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		2429E8AF14F43E10009662F3 /* WisercatApp-Info.plist */ = {isa = PBXFileReference; path = "WisercatApp-Info.plist"; sourceTree = "<group>"; };
+		2429E8B114F43E10009662F3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		2429E8B314F43E10009662F3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		2429E8B514F43E10009662F3 /* WisercatApp-Prefix.pch */ = {isa = PBXFileReference; path = "WisercatApp-Prefix.pch"; sourceTree = "<group>"; };
+		2429E8B614F43E10009662F3 /* WisercatAppDelegate.h */ = {isa = PBXFileReference; path = WisercatAppDelegate.h; sourceTree = "<group>"; };
+		2429E8B714F43E10009662F3 /* WisercatAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WisercatAppDelegate.m; sourceTree = "<group>"; };
+		2429E8BA14F43E10009662F3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		2429E8BC14F43E10009662F3 /* WisercatViewController.h */ = {isa = PBXFileReference; path = WisercatViewController.h; sourceTree = "<group>"; };
+		2429E8BD14F43E10009662F3 /* WisercatViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WisercatViewController.m; sourceTree = "<group>"; };
+		2429E8C414F43E10009662F3 /* WisercatAppTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WisercatAppTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2429E8C514F43E10009662F3 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		2429E8CD14F43E10009662F3 /* WisercatAppTests-Info.plist */ = {isa = PBXFileReference; path = "WisercatAppTests-Info.plist"; sourceTree = "<group>"; };
+		2429E8CF14F43E10009662F3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		2429E8D114F43E10009662F3 /* WisercatAppTests.h */ = {isa = PBXFileReference; path = WisercatAppTests.h; sourceTree = "<group>"; };
+		2429E8D214F43E10009662F3 /* WisercatAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WisercatAppTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2429E8A014F43E10009662F3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2429E8A814F43E10009662F3 /* UIKit.framework in Frameworks */,
+				2429E8AA14F43E10009662F3 /* Foundation.framework in Frameworks */,
+				2429E8AC14F43E10009662F3 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2429E8C014F43E10009662F3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2429E8C614F43E10009662F3 /* SenTestingKit.framework in Frameworks */,
+				2429E8C714F43E10009662F3 /* UIKit.framework in Frameworks */,
+				2429E8C814F43E10009662F3 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2429E89814F43E10009662F3 = {
+			isa = PBXGroup;
+			children = (
+				2429E8AD14F43E10009662F3 /* WisercatApp */,
+				2429E8CB14F43E10009662F3 /* WisercatAppTests */,
+				2429E8A614F43E10009662F3 /* Frameworks */,
+				2429E8A414F43E10009662F3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2429E8A414F43E10009662F3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2429E8A314F43E10009662F3 /* WisercatApp.app */,
+				2429E8C414F43E10009662F3 /* WisercatAppTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2429E8A614F43E10009662F3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2429E8A714F43E10009662F3 /* UIKit.framework */,
+				2429E8A914F43E10009662F3 /* Foundation.framework */,
+				2429E8AB14F43E10009662F3 /* CoreGraphics.framework */,
+				2429E8C514F43E10009662F3 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2429E8AD14F43E10009662F3 /* WisercatApp */ = {
+			isa = PBXGroup;
+			children = (
+				2429E8B614F43E10009662F3 /* WisercatAppDelegate.h */,
+				2429E8B714F43E10009662F3 /* WisercatAppDelegate.m */,
+				2429E8B914F43E10009662F3 /* MainStoryboard.storyboard */,
+				2429E8BC14F43E10009662F3 /* WisercatViewController.h */,
+				2429E8BD14F43E10009662F3 /* WisercatViewController.m */,
+				2429E8AE14F43E10009662F3 /* Supporting Files */,
+			);
+			path = WisercatApp;
+			sourceTree = "<group>";
+		};
+		2429E8AE14F43E10009662F3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2429E8AF14F43E10009662F3 /* WisercatApp-Info.plist */,
+				2429E8B014F43E10009662F3 /* InfoPlist.strings */,
+				2429E8B314F43E10009662F3 /* main.m */,
+				2429E8B514F43E10009662F3 /* WisercatApp-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2429E8CB14F43E10009662F3 /* WisercatAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				2429E8D114F43E10009662F3 /* WisercatAppTests.h */,
+				2429E8D214F43E10009662F3 /* WisercatAppTests.m */,
+				2429E8CC14F43E10009662F3 /* Supporting Files */,
+			);
+			path = WisercatAppTests;
+			sourceTree = "<group>";
+		};
+		2429E8CC14F43E10009662F3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2429E8CD14F43E10009662F3 /* WisercatAppTests-Info.plist */,
+				2429E8CE14F43E10009662F3 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2429E8A214F43E10009662F3 /* WisercatApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2429E8D614F43E10009662F3 /* Build configuration list for PBXNativeTarget "WisercatApp" */;
+			buildPhases = (
+				2429E89F14F43E10009662F3 /* Sources */,
+				2429E8A014F43E10009662F3 /* Frameworks */,
+				2429E8A114F43E10009662F3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WisercatApp;
+			productName = WisercatApp;
+			productReference = 2429E8A314F43E10009662F3 /* WisercatApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+		2429E8C314F43E10009662F3 /* WisercatAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2429E8D914F43E10009662F3 /* Build configuration list for PBXNativeTarget "WisercatAppTests" */;
+			buildPhases = (
+				2429E8BF14F43E10009662F3 /* Sources */,
+				2429E8C014F43E10009662F3 /* Frameworks */,
+				2429E8C114F43E10009662F3 /* Resources */,
+				2429E8C214F43E10009662F3 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2429E8CA14F43E10009662F3 /* PBXTargetDependency */,
+			);
+			name = WisercatAppTests;
+			productName = WisercatAppTests;
+			productReference = 2429E8C414F43E10009662F3 /* WisercatAppTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2429E89A14F43E10009662F3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = TTU;
+			};
+			buildConfigurationList = 2429E89D14F43E10009662F3 /* Build configuration list for PBXProject "WisercatApp" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 2429E89814F43E10009662F3;
+			productRefGroup = 2429E8A414F43E10009662F3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2429E8A214F43E10009662F3 /* WisercatApp */,
+				2429E8C314F43E10009662F3 /* WisercatAppTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2429E8A114F43E10009662F3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2429E8B214F43E10009662F3 /* InfoPlist.strings in Resources */,
+				2429E8BB14F43E10009662F3 /* MainStoryboard.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2429E8C114F43E10009662F3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2429E8D014F43E10009662F3 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2429E8C214F43E10009662F3 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2429E89F14F43E10009662F3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2429E8B414F43E10009662F3 /* main.m in Sources */,
+				2429E8B814F43E10009662F3 /* WisercatAppDelegate.m in Sources */,
+				2429E8BE14F43E10009662F3 /* WisercatViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2429E8BF14F43E10009662F3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2429E8D314F43E10009662F3 /* WisercatAppTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2429E8CA14F43E10009662F3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2429E8A214F43E10009662F3 /* WisercatApp */;
+			targetProxy = 2429E8C914F43E10009662F3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		2429E8B014F43E10009662F3 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2429E8B114F43E10009662F3 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		2429E8B914F43E10009662F3 /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2429E8BA14F43E10009662F3 /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+		2429E8CE14F43E10009662F3 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2429E8CF14F43E10009662F3 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2429E8D414F43E10009662F3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		2429E8D514F43E10009662F3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2429E8D714F43E10009662F3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "WisercatApp/WisercatApp-Prefix.pch";
+				INFOPLIST_FILE = "WisercatApp/WisercatApp-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		2429E8D814F43E10009662F3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "WisercatApp/WisercatApp-Prefix.pch";
+				INFOPLIST_FILE = "WisercatApp/WisercatApp-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		2429E8DA14F43E10009662F3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/WisercatApp.app/WisercatApp";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "WisercatApp/WisercatApp-Prefix.pch";
+				INFOPLIST_FILE = "WisercatAppTests/WisercatAppTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		2429E8DB14F43E10009662F3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/WisercatApp.app/WisercatApp";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "WisercatApp/WisercatApp-Prefix.pch";
+				INFOPLIST_FILE = "WisercatAppTests/WisercatAppTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2429E89D14F43E10009662F3 /* Build configuration list for PBXProject "WisercatApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2429E8D414F43E10009662F3 /* Debug */,
+				2429E8D514F43E10009662F3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2429E8D614F43E10009662F3 /* Build configuration list for PBXNativeTarget "WisercatApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2429E8D714F43E10009662F3 /* Debug */,
+				2429E8D814F43E10009662F3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		2429E8D914F43E10009662F3 /* Build configuration list for PBXNativeTarget "WisercatAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2429E8DA14F43E10009662F3 /* Debug */,
+				2429E8DB14F43E10009662F3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2429E89A14F43E10009662F3 /* Project object */;
+}
