@@ -7,10 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/Mapkit.h>
+
+#define COORDINATE_LATITUDE @"latitude"
+#define COORDINATE_LONGITUDE @"longitude"
+#define COORDINATE_CITYNAME @"cityname"
+#define COORDINATE_TIMEZONE @"timezone"
+#define COORDINATE_LOCALTIME @"localtime"
+
 @class MainScreenViewController;
 @protocol MainScreenViewControllerDelegate
 @required
--(void)mainScreenDidUpdateTheGpsCoordinates:(MainScreenViewController *)sender;
+-(void)mainScreenDidUpdateTheGpsCoordinates:(MainScreenViewController *)sender withAnnotaions:(NSArray *)annotations;
 @end
 
 @interface MainScreenViewController : UIViewController
@@ -19,5 +27,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *localTimeTextField;
 @property (nonatomic, weak) id <MainScreenViewControllerDelegate> delegate;
 - (IBAction)gpsCoordinatesButtonPressed:(id)sender;
+
+@property (nonatomic, weak) NSDictionary *coordinateDictionary;
+
 
 @end

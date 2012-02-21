@@ -7,11 +7,14 @@
 //
 
 #import "MainScreenViewController.h"
+#import "GoogleMapViewController.h"
+#import "MapViewAnnotaion.h"
+#import <MapKit/MapKit.h>
 
 @interface MainScreenViewController () <UITextFieldDelegate> {
     
 }
-
+@property (nonatomic, strong) NSMutableArray *annotaionsArray;
 @end
 
 @implementation MainScreenViewController
@@ -19,6 +22,8 @@
 @synthesize timezoneTextField = _timezoneTextField;
 @synthesize localTimeTextField = _localTimeTextField;
 @synthesize delegate = _delegate;
+@synthesize coordinateDictionary = _coordinateDictionary;
+@synthesize annotaionsArray = _annotaionsArray;
 
 
 #pragma mark - Text Field Delegate
@@ -31,7 +36,13 @@
 #pragma mark - IBActions
 
 - (IBAction)gpsCoordinatesButtonPressed:(id)sender {
-    [self.delegate mainScreenDidUpdateTheGpsCoordinates:self];
+    NSMutableArray *annotations = [[NSMutableArray alloc] init];
+    for (NSDictionary *coordinates in self.coordinateDictionary) {
+        [annotations addObject:[MapViewAnnotaion annotationForMapView:coordinates]];
+    }
+    self.annotaionsArray = annotations;
+    [self.delegate mainScreenDidUpdateTheGpsCoordinates:self withAnnotaions:self.annotaionsArray];
+    
 }
 
 #pragma mark - System Stuff
@@ -50,8 +61,9 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier hasPrefix:@"ShowGoogleMap"]) {
         self.delegate = segue.destinationViewController;
-    
-        
+        if ([segue.destinationViewController respondsToSelector:@selector(setAnnotationsArray:)]) {
+            [segue.destinationViewController setAnnotationsArray:self.annotaionsArray];
+        }
     }
 }
 - (void)viewDidUnload {

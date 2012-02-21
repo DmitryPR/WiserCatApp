@@ -23,8 +23,11 @@
 
 #pragma mark - MainScreenDelegate 
 
--(void)mainScreenDidUpdateTheGpsCoordinates:(MainScreenViewController *)sender {
+-(void)mainScreenDidUpdateTheGpsCoordinates:(MainScreenViewController *)sender withAnnotaions:(NSArray *)annotations {
+    //TODO add something when a user pressed the button
+    self.annotationsArray = annotations;
     [self updateMapView];
+    
 }
 #pragma mark - Methods 
 -(void)updateMapView {

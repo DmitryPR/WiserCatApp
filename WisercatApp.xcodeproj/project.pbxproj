@@ -24,6 +24,7 @@
 		2429E8E414F441A1009662F3 /* GoogleMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2429E8E314F441A1009662F3 /* GoogleMapViewController.m */; };
 		2429E8E914F44572009662F3 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2429E8E714F444A2009662F3 /* MapKit.framework */; };
 		2429E8EA14F4457B009662F3 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2429E8E514F44372009662F3 /* CoreLocation.framework */; };
+		247133C714F44BA800576686 /* MapViewAnnotaion.m in Sources */ = {isa = PBXBuildFile; fileRef = 247133C614F44BA800576686 /* MapViewAnnotaion.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,8 @@
 		2429E8E314F441A1009662F3 /* GoogleMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoogleMapViewController.m; sourceTree = "<group>"; };
 		2429E8E514F44372009662F3 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		2429E8E714F444A2009662F3 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		247133C514F44BA800576686 /* MapViewAnnotaion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewAnnotaion.h; sourceTree = "<group>"; };
+		247133C614F44BA800576686 /* MapViewAnnotaion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewAnnotaion.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +128,7 @@
 		2429E8AD14F43E10009662F3 /* WisercatApp */ = {
 			isa = PBXGroup;
 			children = (
+				247133C914F44BAB00576686 /* Objects */,
 				2429E8E114F4406E009662F3 /* DelegateAndSettings */,
 				2429E8E014F4404A009662F3 /* Views */,
 				2429E8DF14F44034009662F3 /* View Controllers */,
@@ -191,6 +195,15 @@
 				2429E8B714F43E10009662F3 /* WisercatAppDelegate.m */,
 			);
 			name = DelegateAndSettings;
+			sourceTree = "<group>";
+		};
+		247133C914F44BAB00576686 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				247133C514F44BA800576686 /* MapViewAnnotaion.h */,
+				247133C614F44BA800576686 /* MapViewAnnotaion.m */,
+			);
+			name = Objects;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -305,6 +318,7 @@
 				2429E8BE14F43E10009662F3 /* WisercatViewController.m in Sources */,
 				2429E8DE14F4402F009662F3 /* MainScreenViewController.m in Sources */,
 				2429E8E414F441A1009662F3 /* GoogleMapViewController.m in Sources */,
+				247133C714F44BA800576686 /* MapViewAnnotaion.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -474,6 +488,7 @@
 				2429E8D814F43E10009662F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2429E8D914F43E10009662F3 /* Build configuration list for PBXNativeTarget "WisercatAppTests" */ = {
 			isa = XCConfigurationList;
@@ -482,6 +497,7 @@
 				2429E8DB14F43E10009662F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
