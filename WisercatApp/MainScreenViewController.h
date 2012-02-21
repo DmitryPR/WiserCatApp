@@ -1,5 +1,5 @@
 //
-//  WisercatViewController.h
+//  MainScreenViewController.h
 //  WisercatApp
 //
 //  Created by Dmitry Preobrazhenskiy on 21.02.12.
@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface WisercatViewController : UIViewController
-- (IBAction)proceedButtonPressed:(id)sender;
+@interface MainScreenViewController : UIViewController
 
 @end

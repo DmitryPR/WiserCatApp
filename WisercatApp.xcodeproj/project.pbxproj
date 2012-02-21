@@ -20,6 +20,10 @@
 		2429E8C814F43E10009662F3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2429E8A914F43E10009662F3 /* Foundation.framework */; };
 		2429E8D014F43E10009662F3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2429E8CE14F43E10009662F3 /* InfoPlist.strings */; };
 		2429E8D314F43E10009662F3 /* WisercatAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2429E8D214F43E10009662F3 /* WisercatAppTests.m */; };
+		2429E8DE14F4402F009662F3 /* MainScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2429E8DD14F4402F009662F3 /* MainScreenViewController.m */; };
+		2429E8E414F441A1009662F3 /* GoogleMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2429E8E314F441A1009662F3 /* GoogleMapViewController.m */; };
+		2429E8E914F44572009662F3 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2429E8E714F444A2009662F3 /* MapKit.framework */; };
+		2429E8EA14F4457B009662F3 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2429E8E514F44372009662F3 /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,21 +41,27 @@
 		2429E8A714F43E10009662F3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2429E8A914F43E10009662F3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2429E8AB14F43E10009662F3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		2429E8AF14F43E10009662F3 /* WisercatApp-Info.plist */ = {isa = PBXFileReference; path = "WisercatApp-Info.plist"; sourceTree = "<group>"; };
+		2429E8AF14F43E10009662F3 /* WisercatApp-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "WisercatApp-Info.plist"; sourceTree = "<group>"; };
 		2429E8B114F43E10009662F3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2429E8B314F43E10009662F3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		2429E8B514F43E10009662F3 /* WisercatApp-Prefix.pch */ = {isa = PBXFileReference; path = "WisercatApp-Prefix.pch"; sourceTree = "<group>"; };
-		2429E8B614F43E10009662F3 /* WisercatAppDelegate.h */ = {isa = PBXFileReference; path = WisercatAppDelegate.h; sourceTree = "<group>"; };
+		2429E8B514F43E10009662F3 /* WisercatApp-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WisercatApp-Prefix.pch"; sourceTree = "<group>"; };
+		2429E8B614F43E10009662F3 /* WisercatAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WisercatAppDelegate.h; sourceTree = "<group>"; };
 		2429E8B714F43E10009662F3 /* WisercatAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WisercatAppDelegate.m; sourceTree = "<group>"; };
 		2429E8BA14F43E10009662F3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		2429E8BC14F43E10009662F3 /* WisercatViewController.h */ = {isa = PBXFileReference; path = WisercatViewController.h; sourceTree = "<group>"; };
+		2429E8BC14F43E10009662F3 /* WisercatViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WisercatViewController.h; sourceTree = "<group>"; };
 		2429E8BD14F43E10009662F3 /* WisercatViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WisercatViewController.m; sourceTree = "<group>"; };
 		2429E8C414F43E10009662F3 /* WisercatAppTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WisercatAppTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2429E8C514F43E10009662F3 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		2429E8CD14F43E10009662F3 /* WisercatAppTests-Info.plist */ = {isa = PBXFileReference; path = "WisercatAppTests-Info.plist"; sourceTree = "<group>"; };
+		2429E8CD14F43E10009662F3 /* WisercatAppTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "WisercatAppTests-Info.plist"; sourceTree = "<group>"; };
 		2429E8CF14F43E10009662F3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		2429E8D114F43E10009662F3 /* WisercatAppTests.h */ = {isa = PBXFileReference; path = WisercatAppTests.h; sourceTree = "<group>"; };
+		2429E8D114F43E10009662F3 /* WisercatAppTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WisercatAppTests.h; sourceTree = "<group>"; };
 		2429E8D214F43E10009662F3 /* WisercatAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WisercatAppTests.m; sourceTree = "<group>"; };
+		2429E8DC14F4402F009662F3 /* MainScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainScreenViewController.h; sourceTree = "<group>"; };
+		2429E8DD14F4402F009662F3 /* MainScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainScreenViewController.m; sourceTree = "<group>"; };
+		2429E8E214F441A1009662F3 /* GoogleMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoogleMapViewController.h; sourceTree = "<group>"; };
+		2429E8E314F441A1009662F3 /* GoogleMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoogleMapViewController.m; sourceTree = "<group>"; };
+		2429E8E514F44372009662F3 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		2429E8E714F444A2009662F3 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +69,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2429E8EA14F4457B009662F3 /* CoreLocation.framework in Frameworks */,
+				2429E8E914F44572009662F3 /* MapKit.framework in Frameworks */,
 				2429E8A814F43E10009662F3 /* UIKit.framework in Frameworks */,
 				2429E8AA14F43E10009662F3 /* Foundation.framework in Frameworks */,
 				2429E8AC14F43E10009662F3 /* CoreGraphics.framework in Frameworks */,
@@ -100,6 +112,8 @@
 		2429E8A614F43E10009662F3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2429E8E714F444A2009662F3 /* MapKit.framework */,
+				2429E8E514F44372009662F3 /* CoreLocation.framework */,
 				2429E8A714F43E10009662F3 /* UIKit.framework */,
 				2429E8A914F43E10009662F3 /* Foundation.framework */,
 				2429E8AB14F43E10009662F3 /* CoreGraphics.framework */,
@@ -111,11 +125,9 @@
 		2429E8AD14F43E10009662F3 /* WisercatApp */ = {
 			isa = PBXGroup;
 			children = (
-				2429E8B614F43E10009662F3 /* WisercatAppDelegate.h */,
-				2429E8B714F43E10009662F3 /* WisercatAppDelegate.m */,
-				2429E8B914F43E10009662F3 /* MainStoryboard.storyboard */,
-				2429E8BC14F43E10009662F3 /* WisercatViewController.h */,
-				2429E8BD14F43E10009662F3 /* WisercatViewController.m */,
+				2429E8E114F4406E009662F3 /* DelegateAndSettings */,
+				2429E8E014F4404A009662F3 /* Views */,
+				2429E8DF14F44034009662F3 /* View Controllers */,
 				2429E8AE14F43E10009662F3 /* Supporting Files */,
 			);
 			path = WisercatApp;
@@ -149,6 +161,36 @@
 				2429E8CE14F43E10009662F3 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2429E8DF14F44034009662F3 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				2429E8BC14F43E10009662F3 /* WisercatViewController.h */,
+				2429E8BD14F43E10009662F3 /* WisercatViewController.m */,
+				2429E8DC14F4402F009662F3 /* MainScreenViewController.h */,
+				2429E8DD14F4402F009662F3 /* MainScreenViewController.m */,
+				2429E8E214F441A1009662F3 /* GoogleMapViewController.h */,
+				2429E8E314F441A1009662F3 /* GoogleMapViewController.m */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		2429E8E014F4404A009662F3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2429E8B914F43E10009662F3 /* MainStoryboard.storyboard */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		2429E8E114F4406E009662F3 /* DelegateAndSettings */ = {
+			isa = PBXGroup;
+			children = (
+				2429E8B614F43E10009662F3 /* WisercatAppDelegate.h */,
+				2429E8B714F43E10009662F3 /* WisercatAppDelegate.m */,
+			);
+			name = DelegateAndSettings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,6 +303,8 @@
 				2429E8B414F43E10009662F3 /* main.m in Sources */,
 				2429E8B814F43E10009662F3 /* WisercatAppDelegate.m in Sources */,
 				2429E8BE14F43E10009662F3 /* WisercatViewController.m in Sources */,
+				2429E8DE14F4402F009662F3 /* MainScreenViewController.m in Sources */,
+				2429E8E414F441A1009662F3 /* GoogleMapViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
