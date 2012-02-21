@@ -18,6 +18,7 @@
 @property (nonatomic, strong) NSMutableArray *annotaionsArray;
 @property (nonatomic, strong) CLLocationManager *locationMagaer;
 @property (nonatomic, strong) CLLocation *currentLocation;
+@property (nonatomic, strong) CLPlacemark *currentPlace;
 @end
 
 @implementation MainScreenViewController
@@ -30,6 +31,8 @@
 @synthesize locationMagaer = _locationMagaer;
 @synthesize currentLocation = _currentLocation;
 @synthesize locationLabel = _locationLabel;
+@synthesize currentPlace = _currentPlace;
+
 
 
 #pragma mark - Location Delegate 
@@ -38,6 +41,15 @@
     NSString *loactionString = [NSString stringWithFormat:@"%@", self.currentLocation];
     self.locationLabel.text = loactionString;
     NSLog(@"%@", self.currentLocation);
+    CLGeocoder *geoCoder = [[CLGeocoder alloc] init];
+    [geoCoder reverseGeocodeLocation:self.currentLocation completionHandler:^(NSArray *placemarks, NSError *error) {
+        for (CLPlacemark * placemark in placemarks){
+            self.currentPlace = placemark;
+        }
+        
+    }];
+    
+    
 }
 
 #pragma mark - Text Field Delegate
@@ -53,7 +65,7 @@
 #pragma mark - IBActions
 
 - (IBAction)gpsCoordinatesButtonPressed:(id)sender {
-
+    self.cityNameTextField.text = [self.currentPlace locality];
     [self.coordinateDictionary setObject:[NSNumber numberWithDouble:self.currentLocation.coordinate.longitude] forKey:COORDINATE_LONGITUDE];
     [self.coordinateDictionary setObject:[NSNumber numberWithDouble:self.currentLocation.coordinate.latitude] forKey:COORDINATE_LATITUDE];
     [self.coordinateDictionary setValue:self.cityNameTextField.text forKey:COORDINATE_CITYNAME];
