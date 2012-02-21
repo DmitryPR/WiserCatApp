@@ -26,17 +26,18 @@
 @synthesize localTimeTextField = _localTimeTextField;
 @synthesize delegate = _delegate;
 @synthesize coordinateDictionary = _coordinateDictionary;
-@synthesize locationTextView = _locationTextView;
 @synthesize annotaionsArray = _annotaionsArray;
 @synthesize locationMagaer = _locationMagaer;
 @synthesize currentLocation = _currentLocation;
+@synthesize locationLabel = _locationLabel;
 
 
 #pragma mark - Location Delegate 
 -(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
     self.currentLocation = newLocation;
     NSString *loactionString = [NSString stringWithFormat:@"%@", self.currentLocation];
-    self.locationTextView.text = loactionString  ;
+    self.locationLabel.text = loactionString;
+    NSLog(@"%@", self.currentLocation);
 }
 
 #pragma mark - Text Field Delegate
@@ -65,7 +66,7 @@
     self.locationMagaer = [[CLLocationManager alloc] init];
     [self.locationMagaer setDistanceFilter:kCLDistanceFilterNone];
     [self.locationMagaer setDesiredAccuracy:kCLLocationAccuracyBest];
-    [self.locationMagaer stopUpdatingLocation];
+    [self.locationMagaer startUpdatingLocation];
     [self.locationMagaer setDelegate:self];
    
 }
@@ -89,8 +90,8 @@
     [self setCityNameTextField:nil];
     [self setTimezoneTextField:nil];
     [self setLocalTimeTextField:nil];
-    [self setLocationTextView:nil];
     [super viewDidUnload];
+    [self.locationMagaer stopUpdatingLocation];
 }
 
 @end

@@ -29,7 +29,7 @@
 - (IBAction)gpsCoordinatesButtonPressed:(id)sender;
 
 @property (nonatomic, weak) NSDictionary *coordinateDictionary;
+@property (nonatomic, weak) IBOutlet UILabel *locationLabel;
 
-@property (weak, nonatomic) IBOutlet UITextView *locationTextView;
 
 @end

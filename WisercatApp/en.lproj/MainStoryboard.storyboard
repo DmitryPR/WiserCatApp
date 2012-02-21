@@ -131,13 +131,13 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="mEy-XD-m67">
-                                <rect key="frame" x="40" y="276" width="240" height="128"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" lineBreakMode="tailTruncation" minimumFontSize="10" id="Zju-As-YQf">
+                                <rect key="frame" x="6" y="333" width="300" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -151,7 +151,7 @@
                     <connections>
                         <outlet property="cityNameTextField" destination="UsE-30-AsX" id="XXG-Af-R5O"/>
                         <outlet property="localTimeTextField" destination="oCN-fm-7wE" id="gxb-Ic-E8W"/>
-                        <outlet property="locationTextView" destination="mEy-XD-m67" id="erA-3i-4lf"/>
+                        <outlet property="locationLabel" destination="Zju-As-YQf" id="ZBh-IK-9MF"/>
                         <outlet property="timezoneTextField" destination="zfb-va-VVq" id="sof-1O-aZl"/>
                     </connections>
                 </viewController>
@@ -186,6 +186,7 @@
                 <relationship kind="action" name="gpsCoordinatesButtonPressed:"/>
                 <relationship kind="outlet" name="cityNameTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="localTimeTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="locationLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="locationTextView" candidateClass="UITextView"/>
                 <relationship kind="outlet" name="timezoneTextField" candidateClass="UITextField"/>
             </relationships>
