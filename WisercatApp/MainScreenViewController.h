@@ -28,7 +28,7 @@
 @property (nonatomic, weak) id <MainScreenViewControllerDelegate> delegate;
 - (IBAction)gpsCoordinatesButtonPressed:(id)sender;
 
-@property (nonatomic, weak) NSDictionary *coordinateDictionary;
+@property (nonatomic, weak) NSMutableDictionary *coordinateDictionary;
 @property (nonatomic, weak) IBOutlet UILabel *locationLabel;
 
 

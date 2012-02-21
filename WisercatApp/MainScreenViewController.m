@@ -42,15 +42,23 @@
 
 #pragma mark - Text Field Delegate
 
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
 -(void)textFieldDidEndEditing:(UITextField *)textField {
-   
-    [self resignFirstResponder];
+   //TODO do something when the editing is finished
 }
 
 #pragma mark - IBActions
 
 - (IBAction)gpsCoordinatesButtonPressed:(id)sender {
-    
+
+    [self.coordinateDictionary setObject:[NSNumber numberWithDouble:self.currentLocation.coordinate.longitude] forKey:COORDINATE_LONGITUDE];
+    [self.coordinateDictionary setObject:[NSNumber numberWithDouble:self.currentLocation.coordinate.latitude] forKey:COORDINATE_LATITUDE];
+    [self.coordinateDictionary setValue:self.cityNameTextField.text forKey:COORDINATE_CITYNAME];
+    [self.coordinateDictionary setValue:self.timezoneTextField.text forKey:COORDINATE_TIMEZONE];
+    [self.coordinateDictionary setValue:self.localTimeTextField.text forKey:COORDINATE_LOCALTIME];
     NSMutableArray *annotations = [[NSMutableArray alloc] init];
     for (NSDictionary *coordinates in self.coordinateDictionary) {
         [annotations addObject:[MapViewAnnotaion annotationForMapView:coordinates]];
@@ -63,6 +71,11 @@
 #pragma mark - System Stuff
 -(void)viewDidLoad {
     [super viewDidLoad];
+    self.cityNameTextField.delegate = self;
+    self.localTimeTextField.delegate = self;
+    self.timezoneTextField.delegate = self;
+    self.annotaionsArray = [[NSMutableArray alloc] init];
+    self.coordinateDictionary = [[NSMutableDictionary alloc] init];
     self.locationMagaer = [[CLLocationManager alloc] init];
     [self.locationMagaer setDistanceFilter:kCLDistanceFilterNone];
     [self.locationMagaer setDesiredAccuracy:kCLLocationAccuracyBest];
