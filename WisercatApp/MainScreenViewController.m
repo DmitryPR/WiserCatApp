@@ -11,7 +11,7 @@
 #import "MapViewAnnotaion.h"
 #import <MapKit/MapKit.h>
 
-@interface MainScreenViewController () <UITextFieldDelegate, CLLocationManagerDelegate, NSURLConnectionDataDelegate, NSURLConnectionDelegate> {
+@interface MainScreenViewController () <UITextFieldDelegate, CLLocationManagerDelegate, NSURLConnectionDataDelegate, NSURLConnectionDelegate, NSXMLParserDelegate> {
     CLLocationManager *loactionManager;
     
 }
@@ -21,6 +21,8 @@
 @property (nonatomic, strong) CLLocation *currentLocation;
 @property (nonatomic, strong) CLPlacemark *currentPlace;
 @property (nonatomic, strong) NSMutableData *xmlData;
+@property (nonatomic, strong) NSMutableString *timezoneString;
+@property (nonatomic, strong) NSMutableString *localTimeString;
 @end
 
 @implementation MainScreenViewController
@@ -35,7 +37,8 @@
 @synthesize locationLabel = _locationLabel;
 @synthesize currentPlace = _currentPlace;
 @synthesize xmlData = _xmlData;
-
+@synthesize localTimeString = _localTimeString;
+@synthesize timezoneString = _timezoneString;
 
 
 #pragma mark - Location Delegate 
@@ -51,8 +54,6 @@
         }
         
     }];
-    
-    
 }
 
 #pragma mark - Text Field Delegate
@@ -62,26 +63,31 @@
     return YES;
 }
 -(void)textFieldDidEndEditing:(UITextField *)textField {
-   //TODO do something when the editing is finished
+    //TODO do something when the editing is finished
 }
 
 #pragma mark - IBActions
 
 - (IBAction)gpsCoordinatesButtonPressed:(id)sender {
-    self.cityNameTextField.text = [self.currentPlace locality];
+   
     [self initiateURLConnection];
-    [self.coordinateDictionary setObject:[NSNumber numberWithDouble:self.currentLocation.coordinate.longitude] forKey:COORDINATE_LONGITUDE];
-    [self.coordinateDictionary setObject:[NSNumber numberWithDouble:self.currentLocation.coordinate.latitude] forKey:COORDINATE_LATITUDE];
-    [self.coordinateDictionary setValue:self.cityNameTextField.text forKey:COORDINATE_CITYNAME];
-    [self.coordinateDictionary setValue:self.timezoneTextField.text forKey:COORDINATE_TIMEZONE];
-    [self.coordinateDictionary setValue:self.localTimeTextField.text forKey:COORDINATE_LOCALTIME];
+    self.cityNameTextField.text = [self.currentPlace locality];
+}
+
+- (IBAction)saveToMapButtonPressed:(id)sender {
+    
     NSMutableArray *annotations = [[NSMutableArray alloc] init];
     for (NSDictionary *coordinates in self.coordinateDictionary) {
         [annotations addObject:[MapViewAnnotaion annotationForMapView:coordinates]];
     }
     self.annotaionsArray = annotations;
     [self.delegate mainScreenDidUpdateTheGpsCoordinates:self withAnnotaions:self.annotaionsArray];
-    
+    [self.coordinateDictionary setObject:[NSNumber numberWithDouble:self.currentLocation.coordinate.longitude] forKey:COORDINATE_LONGITUDE];
+    [self.coordinateDictionary setObject:[NSNumber numberWithDouble:self.currentLocation.coordinate.latitude] forKey:COORDINATE_LATITUDE];
+    [self.coordinateDictionary setValue:self.cityNameTextField.text forKey:COORDINATE_CITYNAME];
+    [self.coordinateDictionary setValue:self.timezoneTextField.text forKey:COORDINATE_TIMEZONE];
+    [self.coordinateDictionary setValue:self.localTimeTextField.text forKey:COORDINATE_LOCALTIME];
+
 }
 
 #pragma mark NSURLConnectionDataDelegate
@@ -89,10 +95,14 @@
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection {
     NSString *xmlString = [[NSString alloc] initWithData:self.xmlData encoding:NSUTF8StringEncoding];
     NSLog(@"incoming xml =  %@", xmlString);
+    
+    NSXMLParser *parser = [[NSXMLParser alloc] initWithData:self.xmlData];
+    parser.delegate = self;
+    [parser parse];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response{
-  //TODO something to see the response if we need it
+    //TODO something to see the response if we need it
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data{
@@ -112,12 +122,48 @@
     
 }
 
+#pragma mark - NSXMLParserDelegate 
+-(void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict {
+    if ([elementName isEqualToString:@"offset"]) {
+        self.timezoneString= [[NSMutableString alloc] init];
+    }
+    if ([elementName isEqualToString:@"localtime"]) {
+        self.localTimeString = [[NSMutableString alloc] init];
+    }
+}
+
+-(void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
+    if ([elementName isEqualToString:@"offset"]) {
+        self.timezoneString= nil;
+    }
+    if ([elementName isEqualToString:@"localtime"]) {
+        self.localTimeString = nil;
+    }
+}
+
+-(void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
+    if (self.timezoneString != nil) {
+        [self.timezoneString appendString:string];
+        self.timezoneTextField.text = self.timezoneString;
+        
+    }
+    if (self.localTimeString != nil) {
+        [self.localTimeString appendString:string];
+        self.localTimeTextField.text = self.localTimeString;
+    }
+}
+
 #pragma mark - Methods 
 -(void)initiateURLConnection{
-    NSString *connectionLatitude = [[NSString alloc] initWithFormat:@"%d", [NSNumber numberWithDouble:self.currentLocation.coordinate.latitude]];
-    NSString *connectionLongitude = [[NSString alloc] initWithFormat:@"%d", [NSNumber numberWithDouble:self.currentLocation.coordinate.longitude]];
-
+    NSString *connectionLatitude = [[NSString alloc] initWithFormat:@"%g", self.currentLocation.coordinate.latitude];
+    NSString *connectionLongitude = [[NSString alloc] initWithFormat:@"%g", self.currentLocation.coordinate.longitude];
+    
+    NSLog(@"latitude is %@", connectionLatitude);
+    NSLog(@"longitude is %@", connectionLongitude);
+    
     NSMutableString *connectionString = [NSMutableString stringWithFormat:@"http://www.earthtools.org/timezone/%@/%@", connectionLatitude, connectionLongitude];
+    
+    NSLog(@"connection string is %@", connectionString);
     NSURL *url = [NSURL URLWithString:connectionString];
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
     NSURLConnection *connection = [NSURLConnection connectionWithRequest:request delegate:self];
@@ -128,7 +174,7 @@
 #pragma mark - System Stuff
 -(void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.currentLocation = [[CLLocation alloc] init];
     self.cityNameTextField.delegate = self;
     self.localTimeTextField.delegate = self;
     self.timezoneTextField.delegate = self;
@@ -139,7 +185,7 @@
     [self.locationMagaer setDesiredAccuracy:kCLLocationAccuracyBest];
     [self.locationMagaer startUpdatingLocation];
     [self.locationMagaer setDelegate:self];
-   
+    
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

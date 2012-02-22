@@ -26,10 +26,12 @@
 @property (weak, nonatomic) IBOutlet UITextField *timezoneTextField;
 @property (weak, nonatomic) IBOutlet UITextField *localTimeTextField;
 @property (nonatomic, weak) id <MainScreenViewControllerDelegate> delegate;
-- (IBAction)gpsCoordinatesButtonPressed:(id)sender;
 
 @property (nonatomic, weak) NSMutableDictionary *coordinateDictionary;
 @property (nonatomic, weak) IBOutlet UILabel *locationLabel;
+- (IBAction)gpsCoordinatesButtonPressed:(id)sender;
+
+- (IBAction)saveToMapButtonPressed:(id)sender;
 
 
 @end
