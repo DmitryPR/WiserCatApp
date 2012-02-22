@@ -29,7 +29,6 @@
 @synthesize cityNameTextField = _cityNameTextField;
 @synthesize timezoneTextField = _timezoneTextField;
 @synthesize localTimeTextField = _localTimeTextField;
-@synthesize delegate = _delegate;
 @synthesize coordinateDictionary = _coordinateDictionary;
 @synthesize annotaionsArray = _annotaionsArray;
 @synthesize locationMagaer = _locationMagaer;
@@ -72,23 +71,15 @@
 - (IBAction)gpsCoordinatesButtonPressed:(id)sender {
    
     [self initiateURLConnection];
-    //self.cityNameTextField.text = [self.currentPlace locality];
 }
 
 - (IBAction)saveToMapButtonPressed:(id)sender {
     
     
-    [self.coordinateDictionary setObject:[NSNumber numberWithDouble:self.currentLocation.coordinate.longitude] forKey:COORDINATE_LONGITUDE];
-    [self.coordinateDictionary setObject:[NSNumber numberWithDouble:self.currentLocation.coordinate.latitude] forKey:COORDINATE_LATITUDE];
-    [self.coordinateDictionary setValue:self.cityNameTextField.text forKey:COORDINATE_CITYNAME];
-    [self.coordinateDictionary setValue:self.timezoneTextField.text forKey:COORDINATE_TIMEZONE];
-    [self.coordinateDictionary setValue:self.localTimeTextField.text forKey:COORDINATE_LOCALTIME];
-    self.annotaionsArray = [[NSMutableArray alloc] init];
-    for (NSDictionary *coordinates in self.coordinateDictionary) {
-        [self.annotaionsArray addObject:[MapViewAnnotaion annotationForMapView:coordinates]];
-    }
-    
-     [self.delegate mainScreenDidUpdateTheGpsCoordinates:self withAnnotaions:self.annotaionsArray];
+    NSMutableDictionary *savedDictionary = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithDouble:self.currentLocation.coordinate.longitude], COORDINATE_LONGITUDE, [NSNumber numberWithDouble:self.currentLocation.coordinate.latitude],COORDINATE_LATITUDE, self.cityNameTextField.text, COORDINATE_CITYNAME, self.timezoneTextField.text, COORDINATE_TIMEZONE, self.localTimeTextField.text, COORDINATE_LOCALTIME, nil];
+        NSLog(@"Number of entries in dictionary %d",[savedDictionary count]);
+        self.coordinateDictionary = savedDictionary;
+        [self.annotaionsArray addObject:[MapViewAnnotaion annotationForMapView:savedDictionary]];
 }
 
 #pragma mark NSURLConnectionDataDelegate
@@ -178,11 +169,12 @@
 #pragma mark - System Stuff
 -(void)viewDidLoad {
     [super viewDidLoad];
+    self.coordinateDictionary = [[NSMutableDictionary alloc] init];
+    self.annotaionsArray = [[NSMutableArray alloc] init];
     self.currentLocation = [[CLLocation alloc] init];
     self.cityNameTextField.delegate = self;
     self.localTimeTextField.delegate = self;
     self.timezoneTextField.delegate = self;
-    self.coordinateDictionary = [[NSMutableDictionary alloc] init];
     self.locationMagaer = [[CLLocationManager alloc] init];
     [self.locationMagaer setDistanceFilter:kCLDistanceFilterNone];
     [self.locationMagaer setDesiredAccuracy:kCLLocationAccuracyBest];
@@ -200,7 +192,6 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier hasPrefix:@"ShowGoogleMap"]) {
-        self.delegate = segue.destinationViewController;
         if ([segue.destinationViewController respondsToSelector:@selector(setAnnotationsArray:)]) {
             [segue.destinationViewController setAnnotationsArray:self.annotaionsArray];
         }

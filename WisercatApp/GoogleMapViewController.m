@@ -9,7 +9,7 @@
 #import "GoogleMapViewController.h"
 #import "MainScreenViewController.h"
 
-@interface GoogleMapViewController () <MainScreenViewControllerDelegate> {
+@interface GoogleMapViewController () {
     
 }
 -(void)updateMapView;

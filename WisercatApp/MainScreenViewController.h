@@ -16,21 +16,15 @@
 #define COORDINATE_LOCALTIME @"localtime"
 
 @class MainScreenViewController;
-@protocol MainScreenViewControllerDelegate
-@required
--(void)mainScreenDidUpdateTheGpsCoordinates:(MainScreenViewController *)sender withAnnotaions:(NSArray *)annotations;
-@end
 
 @interface MainScreenViewController : UIViewController 
 @property (weak, nonatomic) IBOutlet UITextField *cityNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *timezoneTextField;
 @property (weak, nonatomic) IBOutlet UITextField *localTimeTextField;
-@property (nonatomic, weak) id <MainScreenViewControllerDelegate> delegate;
 
 @property (nonatomic, weak) NSMutableDictionary *coordinateDictionary;
 @property (nonatomic, weak) IBOutlet UILabel *locationLabel;
 - (IBAction)gpsCoordinatesButtonPressed:(id)sender;
-
 - (IBAction)saveToMapButtonPressed:(id)sender;
 
 
