@@ -50,7 +50,6 @@
     [geoCoder reverseGeocodeLocation:self.currentLocation completionHandler:^(NSArray *placemarks, NSError *error) {
         for (CLPlacemark * placemark in placemarks){
             self.currentPlace = [[CLPlacemark alloc] initWithPlacemark:placemark];
-            self.cityNameTextField.text = [self.currentPlace locality];
         }
         
     }];
@@ -69,7 +68,7 @@
 #pragma mark - IBActions
 
 - (IBAction)gpsCoordinatesButtonPressed:(id)sender {
-   
+    self.cityNameTextField.text = [self.currentPlace locality];
     [self initiateURLConnection];
 }
 
@@ -79,7 +78,16 @@
     NSMutableDictionary *savedDictionary = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithDouble:self.currentLocation.coordinate.longitude], COORDINATE_LONGITUDE, [NSNumber numberWithDouble:self.currentLocation.coordinate.latitude],COORDINATE_LATITUDE, self.cityNameTextField.text, COORDINATE_CITYNAME, self.timezoneTextField.text, COORDINATE_TIMEZONE, self.localTimeTextField.text, COORDINATE_LOCALTIME, nil];
         NSLog(@"Number of entries in dictionary %d",[savedDictionary count]);
         self.coordinateDictionary = savedDictionary;
-        [self.annotaionsArray addObject:[MapViewAnnotaion annotationForMapView:savedDictionary]];
+        [self.annotaionsArray addObject:[MapViewAnnotaion annotationForMapView:self.coordinateDictionary]];
+}
+
+- (IBAction)clearTheMapButtonPressed:(id)sender {
+    self.coordinateDictionary = nil;
+    self.annotaionsArray = [[NSMutableArray alloc] init];
+    self.cityNameTextField.text = @"";
+    self.localTimeTextField.text = @"";
+    self.timezoneTextField.text = @"";
+    
 }
 
 #pragma mark NSURLConnectionDataDelegate

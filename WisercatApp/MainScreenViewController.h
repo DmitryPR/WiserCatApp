@@ -26,6 +26,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *locationLabel;
 - (IBAction)gpsCoordinatesButtonPressed:(id)sender;
 - (IBAction)saveToMapButtonPressed:(id)sender;
+- (IBAction)clearTheMapButtonPressed:(id)sender;
 
 
 @end
