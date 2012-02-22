@@ -21,7 +21,7 @@
 -(void)mainScreenDidUpdateTheGpsCoordinates:(MainScreenViewController *)sender withAnnotaions:(NSArray *)annotations;
 @end
 
-@interface MainScreenViewController : UIViewController
+@interface MainScreenViewController : UIViewController 
 @property (weak, nonatomic) IBOutlet UITextField *cityNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *timezoneTextField;
 @property (weak, nonatomic) IBOutlet UITextField *localTimeTextField;

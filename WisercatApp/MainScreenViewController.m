@@ -11,14 +11,16 @@
 #import "MapViewAnnotaion.h"
 #import <MapKit/MapKit.h>
 
-@interface MainScreenViewController () <UITextFieldDelegate, CLLocationManagerDelegate> {
+@interface MainScreenViewController () <UITextFieldDelegate, CLLocationManagerDelegate, NSURLConnectionDataDelegate, NSURLConnectionDelegate> {
     CLLocationManager *loactionManager;
     
 }
+-(void)initiateURLConnection;
 @property (nonatomic, strong) NSMutableArray *annotaionsArray;
 @property (nonatomic, strong) CLLocationManager *locationMagaer;
 @property (nonatomic, strong) CLLocation *currentLocation;
 @property (nonatomic, strong) CLPlacemark *currentPlace;
+@property (nonatomic, strong) NSMutableData *xmlData;
 @end
 
 @implementation MainScreenViewController
@@ -32,6 +34,7 @@
 @synthesize currentLocation = _currentLocation;
 @synthesize locationLabel = _locationLabel;
 @synthesize currentPlace = _currentPlace;
+@synthesize xmlData = _xmlData;
 
 
 
@@ -66,6 +69,7 @@
 
 - (IBAction)gpsCoordinatesButtonPressed:(id)sender {
     self.cityNameTextField.text = [self.currentPlace locality];
+    [self initiateURLConnection];
     [self.coordinateDictionary setObject:[NSNumber numberWithDouble:self.currentLocation.coordinate.longitude] forKey:COORDINATE_LONGITUDE];
     [self.coordinateDictionary setObject:[NSNumber numberWithDouble:self.currentLocation.coordinate.latitude] forKey:COORDINATE_LATITUDE];
     [self.coordinateDictionary setValue:self.cityNameTextField.text forKey:COORDINATE_CITYNAME];
@@ -80,9 +84,51 @@
     
 }
 
+#pragma mark NSURLConnectionDataDelegate
+
+-(void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    NSString *xmlString = [[NSString alloc] initWithData:self.xmlData encoding:NSUTF8StringEncoding];
+    NSLog(@"incoming xml =  %@", xmlString);
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response{
+  //TODO something to see the response if we need it
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data{
+    //Append the incoming data
+    self.xmlData = [[NSMutableData alloc] init];
+    [self.xmlData appendData:data];
+}
+
+#pragma mark NSURLConnectionDelegate 
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+    NSLog(@"Connection failed");
+}
+
+- (void)connection:(NSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {
+    NSLog(@"Connection is set");
+    
+}
+
+#pragma mark - Methods 
+-(void)initiateURLConnection{
+    NSString *connectionLatitude = [[NSString alloc] initWithFormat:@"%d", [NSNumber numberWithDouble:self.currentLocation.coordinate.latitude]];
+    NSString *connectionLongitude = [[NSString alloc] initWithFormat:@"%d", [NSNumber numberWithDouble:self.currentLocation.coordinate.longitude]];
+
+    NSMutableString *connectionString = [NSMutableString stringWithFormat:@"http://www.earthtools.org/timezone/%@/%@", connectionLatitude, connectionLongitude];
+    NSURL *url = [NSURL URLWithString:connectionString];
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
+    NSURLConnection *connection = [NSURLConnection connectionWithRequest:request delegate:self];
+    [connection start];
+    
+}
+
 #pragma mark - System Stuff
 -(void)viewDidLoad {
     [super viewDidLoad];
+    
     self.cityNameTextField.delegate = self;
     self.localTimeTextField.delegate = self;
     self.timezoneTextField.delegate = self;
