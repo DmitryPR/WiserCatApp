@@ -33,7 +33,7 @@
 -(CLLocationCoordinate2D)coordinate {
     CLLocationCoordinate2D coordinateForAnnotation; 
     coordinateForAnnotation.latitude = [[self.coordinateDictionary objectForKey:COORDINATE_LATITUDE] doubleValue];
-    coordinateForAnnotation.longitude = [[self.coordinateDictionary valueForKey:COORDINATE_LONGITUDE]doubleValue];
+    coordinateForAnnotation.longitude = [[self.coordinateDictionary objectForKey:COORDINATE_LONGITUDE]doubleValue];
     return coordinateForAnnotation;
 }
 @end

@@ -50,7 +50,8 @@
     CLGeocoder *geoCoder = [[CLGeocoder alloc] init];
     [geoCoder reverseGeocodeLocation:self.currentLocation completionHandler:^(NSArray *placemarks, NSError *error) {
         for (CLPlacemark * placemark in placemarks){
-            self.currentPlace = placemark;
+            self.currentPlace = [[CLPlacemark alloc] initWithPlacemark:placemark];
+            self.cityNameTextField.text = [self.currentPlace locality];
         }
         
     }];
@@ -71,23 +72,23 @@
 - (IBAction)gpsCoordinatesButtonPressed:(id)sender {
    
     [self initiateURLConnection];
-    self.cityNameTextField.text = [self.currentPlace locality];
+    //self.cityNameTextField.text = [self.currentPlace locality];
 }
 
 - (IBAction)saveToMapButtonPressed:(id)sender {
     
-    NSMutableArray *annotations = [[NSMutableArray alloc] init];
-    for (NSDictionary *coordinates in self.coordinateDictionary) {
-        [annotations addObject:[MapViewAnnotaion annotationForMapView:coordinates]];
-    }
-    self.annotaionsArray = annotations;
-    [self.delegate mainScreenDidUpdateTheGpsCoordinates:self withAnnotaions:self.annotaionsArray];
+    
     [self.coordinateDictionary setObject:[NSNumber numberWithDouble:self.currentLocation.coordinate.longitude] forKey:COORDINATE_LONGITUDE];
     [self.coordinateDictionary setObject:[NSNumber numberWithDouble:self.currentLocation.coordinate.latitude] forKey:COORDINATE_LATITUDE];
     [self.coordinateDictionary setValue:self.cityNameTextField.text forKey:COORDINATE_CITYNAME];
     [self.coordinateDictionary setValue:self.timezoneTextField.text forKey:COORDINATE_TIMEZONE];
     [self.coordinateDictionary setValue:self.localTimeTextField.text forKey:COORDINATE_LOCALTIME];
-
+    self.annotaionsArray = [[NSMutableArray alloc] init];
+    for (NSDictionary *coordinates in self.coordinateDictionary) {
+        [self.annotaionsArray addObject:[MapViewAnnotaion annotationForMapView:coordinates]];
+    }
+    
+     [self.delegate mainScreenDidUpdateTheGpsCoordinates:self withAnnotaions:self.annotaionsArray];
 }
 
 #pragma mark NSURLConnectionDataDelegate
@@ -152,6 +153,9 @@
         self.localTimeTextField.text = self.localTimeString;
     }
 }
+-(void)parserDidEndDocument:(NSXMLParser *)parser {
+    NSLog(@"success on parsing");
+}
 
 #pragma mark - Methods 
 -(void)initiateURLConnection{
@@ -178,7 +182,6 @@
     self.cityNameTextField.delegate = self;
     self.localTimeTextField.delegate = self;
     self.timezoneTextField.delegate = self;
-    self.annotaionsArray = [[NSMutableArray alloc] init];
     self.coordinateDictionary = [[NSMutableDictionary alloc] init];
     self.locationMagaer = [[CLLocationManager alloc] init];
     [self.locationMagaer setDistanceFilter:kCLDistanceFilterNone];
