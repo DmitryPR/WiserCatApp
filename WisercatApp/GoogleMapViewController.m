@@ -10,25 +10,12 @@
 #import "MainScreenViewController.h"
 
 @interface GoogleMapViewController () {
-    
 }
 -(void)updateMapView;
 @end
-
 @implementation GoogleMapViewController
 @synthesize mapView = _mapView;
 @synthesize annotationsArray = _annotationsArray;
-
-
-
-#pragma mark - MainScreenDelegate 
-
--(void)mainScreenDidUpdateTheGpsCoordinates:(MainScreenViewController *)sender withAnnotaions:(NSArray *)annotations {
-    //TODO add something when a user pressed the button
-    self.annotationsArray = annotations;
-    [self updateMapView];
-    
-}
 #pragma mark - Methods 
 -(void)updateMapView {
     if (self.mapView.annotations) {
@@ -51,7 +38,6 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations
     return YES;
 }
 

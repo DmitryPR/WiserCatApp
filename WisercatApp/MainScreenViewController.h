@@ -15,7 +15,6 @@
 #define COORDINATE_TIMEZONE @"timezone"
 #define COORDINATE_LOCALTIME @"localtime"
 
-@class MainScreenViewController;
 
 @interface MainScreenViewController : UIViewController 
 @property (weak, nonatomic) IBOutlet UITextField *cityNameTextField;

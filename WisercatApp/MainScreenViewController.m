@@ -11,8 +11,13 @@
 #import "MapViewAnnotaion.h"
 #import <MapKit/MapKit.h>
 
-@interface MainScreenViewController () <UITextFieldDelegate, CLLocationManagerDelegate, NSURLConnectionDataDelegate, NSURLConnectionDelegate, NSXMLParserDelegate> {
+@interface MainScreenViewController () <UITextFieldDelegate, 
+CLLocationManagerDelegate, 
+NSURLConnectionDataDelegate, 
+NSURLConnectionDelegate, 
+NSXMLParserDelegate> {
     CLLocationManager *loactionManager;
+    BOOL isUpdatingLocatons;
     
 }
 -(void)initiateURLConnection;
@@ -23,8 +28,8 @@
 @property (nonatomic, strong) NSMutableData *xmlData;
 @property (nonatomic, strong) NSMutableString *timezoneString;
 @property (nonatomic, strong) NSMutableString *localTimeString;
+@property (nonatomic) BOOL isUpdatingLocations;
 @end
-
 @implementation MainScreenViewController
 @synthesize cityNameTextField = _cityNameTextField;
 @synthesize timezoneTextField = _timezoneTextField;
@@ -38,21 +43,20 @@
 @synthesize xmlData = _xmlData;
 @synthesize localTimeString = _localTimeString;
 @synthesize timezoneString = _timezoneString;
-
-
+@synthesize isUpdatingLocations = _isUpdatingLocations;
 #pragma mark - Location Delegate 
 -(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
     self.currentLocation = newLocation;
     NSString *loactionString = [NSString stringWithFormat:@"%@", self.currentLocation];
     self.locationLabel.text = loactionString;
     NSLog(@"%@", self.currentLocation);
-    CLGeocoder *geoCoder = [[CLGeocoder alloc] init];
+    CLGeocoder *geoCoder = [CLGeocoder new];
     [geoCoder reverseGeocodeLocation:self.currentLocation completionHandler:^(NSArray *placemarks, NSError *error) {
         for (CLPlacemark * placemark in placemarks){
             self.currentPlace = [[CLPlacemark alloc] initWithPlacemark:placemark];
         }
-        
     }];
+     
 }
 
 #pragma mark - Text Field Delegate
@@ -61,24 +65,31 @@
     [textField resignFirstResponder];
     return YES;
 }
--(void)textFieldDidEndEditing:(UITextField *)textField {
-    //TODO do something when the editing is finished
-}
-
 #pragma mark - IBActions
 
 - (IBAction)gpsCoordinatesButtonPressed:(id)sender {
+    if (!self.isUpdatingLocations) {
+        [self.locationMagaer startUpdatingLocation];
+    }
     self.cityNameTextField.text = [self.currentPlace locality];
     [self initiateURLConnection];
+    [self.locationMagaer stopUpdatingLocation];
 }
 
 - (IBAction)saveToMapButtonPressed:(id)sender {
-    
-    
-    NSMutableDictionary *savedDictionary = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithDouble:self.currentLocation.coordinate.longitude], COORDINATE_LONGITUDE, [NSNumber numberWithDouble:self.currentLocation.coordinate.latitude],COORDINATE_LATITUDE, self.cityNameTextField.text, COORDINATE_CITYNAME, self.timezoneTextField.text, COORDINATE_TIMEZONE, self.localTimeTextField.text, COORDINATE_LOCALTIME, nil];
-        NSLog(@"Number of entries in dictionary %d",[savedDictionary count]);
-        self.coordinateDictionary = savedDictionary;
-        [self.annotaionsArray addObject:[MapViewAnnotaion annotationForMapView:self.coordinateDictionary]];
+    NSMutableDictionary *savedDictionary = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
+                                            [NSNumber numberWithDouble:self.currentLocation.coordinate.longitude], 
+                                            COORDINATE_LONGITUDE, 
+                                            [NSNumber numberWithDouble:self.currentLocation.coordinate.latitude],
+                                            COORDINATE_LATITUDE, 
+                                            self.cityNameTextField.text, 
+                                            COORDINATE_CITYNAME, 
+                                            self.timezoneTextField.text, 
+                                            COORDINATE_TIMEZONE, 
+                                            self.localTimeTextField.text, 
+                                            COORDINATE_LOCALTIME, nil];
+    self.coordinateDictionary = savedDictionary;
+    [self.annotaionsArray addObject:[MapViewAnnotaion annotationForMapView:self.coordinateDictionary]];
 }
 
 - (IBAction)clearTheMapButtonPressed:(id)sender {
@@ -102,7 +113,6 @@
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response{
-    //TODO something to see the response if we need it
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data{
@@ -144,15 +154,19 @@
 -(void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
     if (self.timezoneString != nil) {
         [self.timezoneString appendString:string];
-        self.timezoneTextField.text = self.timezoneString;
+         self.timezoneTextField.text = self.timezoneString;
+        
         
     }
     if (self.localTimeString != nil) {
         [self.localTimeString appendString:string];
         self.localTimeTextField.text = self.localTimeString;
+        
     }
 }
 -(void)parserDidEndDocument:(NSXMLParser *)parser {
+   
+    
     NSLog(@"success on parsing");
 }
 
@@ -171,9 +185,7 @@
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
     NSURLConnection *connection = [NSURLConnection connectionWithRequest:request delegate:self];
     [connection start];
-    
 }
-
 #pragma mark - System Stuff
 -(void)viewDidLoad {
     [super viewDidLoad];
@@ -186,14 +198,15 @@
     self.locationMagaer = [[CLLocationManager alloc] init];
     [self.locationMagaer setDistanceFilter:kCLDistanceFilterNone];
     [self.locationMagaer setDesiredAccuracy:kCLLocationAccuracyBest];
-    [self.locationMagaer startUpdatingLocation];
     [self.locationMagaer setDelegate:self];
+    [self.locationMagaer startUpdatingLocation];
+    self.isUpdatingLocations = YES;
+   
     
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations
     return YES;
 }
 
@@ -211,6 +224,7 @@
     [self setLocalTimeTextField:nil];
     [super viewDidUnload];
     [self.locationMagaer stopUpdatingLocation];
+    
 }
 
 @end
