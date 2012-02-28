@@ -16,7 +16,7 @@ CLLocationManagerDelegate,
 NSURLConnectionDataDelegate, 
 NSURLConnectionDelegate, 
 NSXMLParserDelegate> {
-    CLLocationManager *loactionManager;
+    CLLocationManager *locationManager;
     BOOL isUpdatingLocatons;
     
 }
