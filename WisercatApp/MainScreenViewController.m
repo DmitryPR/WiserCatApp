@@ -10,6 +10,7 @@
 #import "GoogleMapViewController.h"
 #import "MapViewAnnotaion.h"
 #import <MapKit/MapKit.h>
+#import "Reachability.h"
 
 @interface MainScreenViewController () <UITextFieldDelegate, 
 CLLocationManagerDelegate, 
@@ -18,9 +19,14 @@ NSURLConnectionDelegate,
 NSXMLParserDelegate> {
     CLLocationManager *locationManager;
     BOOL isUpdatingLocatons;
+    Reachability *internetReachability;
+    Reachability *hostReachability;
+    BOOL isInternetActive;
+    BOOL isHostReachable;
     
 }
 //Two methods needed for the parsing and notifying
+-(void)checkNetworkStatus:(NSNotification *)notification;
 -(void)initiateURLConnection;
 -(void)processTheParsedInformation:(NSNotification *)notification;
 @property (nonatomic, strong) NSMutableArray *annotaionsArray;
@@ -31,6 +37,10 @@ NSXMLParserDelegate> {
 @property (nonatomic, strong) NSMutableString *timezoneString;
 @property (nonatomic, strong) NSMutableString *localTimeString;
 @property (nonatomic) BOOL isUpdatingLocations;
+@property (nonatomic, strong) Reachability *internetReachibility;
+@property (nonatomic, strong) Reachability *hostReachability;
+@property (nonatomic) BOOL isInternetActive;
+@property (nonatomic) BOOL isHostReachable;
 @end
 @implementation MainScreenViewController
 @synthesize cityNameTextField = _cityNameTextField;
@@ -46,6 +56,10 @@ NSXMLParserDelegate> {
 @synthesize localTimeString = _localTimeString;
 @synthesize timezoneString = _timezoneString;
 @synthesize isUpdatingLocations = _isUpdatingLocations;
+@synthesize internetReachibility = _internetReachibility;
+@synthesize hostReachability = _hostReachability;
+@synthesize isInternetActive = _isInternetActive;
+@synthesize isHostReachable = _isHostReachable;
 #pragma mark - Location Delegate 
 //Making a new loactionManager here which allows to reverse the geocode in order to get the required information
 -(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
@@ -83,7 +97,15 @@ NSXMLParserDelegate> {
         [self.locationMagaer startUpdatingLocation];
     }
     //Adding some time here for a better result.
-    [self performSelector:@selector(initiateURLConnection) withObject:nil afterDelay:0.5];
+    if (!self.isInternetActive) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"The Internet connection is down. Please try again later..." delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil];
+        [alertView show];
+        return;
+    }
+    else {
+        [self performSelector:@selector(initiateURLConnection) withObject:nil afterDelay:0.5];
+    }
+    
 }
 
 - (IBAction)saveToMapButtonPressed:(id)sender {
@@ -184,6 +206,7 @@ NSXMLParserDelegate> {
 
 #pragma mark - Methods 
 -(void)initiateURLConnection{
+  
     NSString *connectionLatitude = [[NSString alloc] initWithFormat:@"%g", self.currentLocation.coordinate.latitude];
     NSString *connectionLongitude = [[NSString alloc] initWithFormat:@"%g", self.currentLocation.coordinate.longitude];
     
@@ -202,6 +225,62 @@ NSXMLParserDelegate> {
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
     NSURLConnection *connection = [NSURLConnection connectionWithRequest:request delegate:self];
     [connection start];
+}
+
+#pragma mark - Notifications
+-(void)checkNetworkStatus:(NSNotification *)notification {
+    {
+        // called after network status changes
+        NetworkStatus internetStatus = [self.internetReachibility currentReachabilityStatus];
+        switch (internetStatus)
+        {
+            case NotReachable:
+            {
+                NSLog(@"The internet is down.");
+                self.isInternetActive = NO;
+                
+                break;
+            }
+            case ReachableViaWiFi:
+            {
+                NSLog(@"The internet is working via WIFI.");
+                self.isInternetActive = YES;
+                
+                break;
+            }
+            case ReachableViaWWAN:
+            {
+                NSLog(@"The internet is working via WWAN.");
+                self.isInternetActive = YES;
+                
+                break;
+            }
+    }
+        NetworkStatus hostStatus = [self.hostReachability currentReachabilityStatus];
+        switch (hostStatus)
+        {
+            case NotReachable:
+            {
+                NSLog(@"A gateway to the host server is down.");
+                self.isHostReachable = NO;
+                
+                break;
+            }
+            case ReachableViaWiFi:
+            {
+                NSLog(@"A gateway to the host server is working via WIFI.");
+                self.isHostReachable = YES;
+                
+                break;
+            }
+            case ReachableViaWWAN:
+            {
+                NSLog(@"A gateway to the host server is working via WWAN.");
+                self.isHostReachable = YES;
+                break;
+            }
+        }
+    }
 }
 
 -(void)processTheParsedInformation:(NSNotification *)notification {
@@ -229,6 +308,21 @@ NSXMLParserDelegate> {
     self.isUpdatingLocations = NO;
    
     
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkNetworkStatus:) name:kReachabilityChangedNotification object:nil];
+    
+    self.internetReachibility = [Reachability reachabilityForInternetConnection];
+    [self.internetReachibility startNotifier];
+    
+    // check if a pathway to a random host exists
+    self.hostReachability = [Reachability reachabilityWithHostName:@"www.earthtools.org"];
+    [self.hostReachability startNotifier];
+}
+
+-(void)viewWillDisappear:(BOOL)animated {
+      [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 

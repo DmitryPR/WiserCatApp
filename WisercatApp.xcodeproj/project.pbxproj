@@ -25,6 +25,8 @@
 		2429E8E914F44572009662F3 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2429E8E714F444A2009662F3 /* MapKit.framework */; };
 		2429E8EA14F4457B009662F3 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2429E8E514F44372009662F3 /* CoreLocation.framework */; };
 		247133C714F44BA800576686 /* MapViewAnnotaion.m in Sources */ = {isa = PBXBuildFile; fileRef = 247133C614F44BA800576686 /* MapViewAnnotaion.m */; };
+		247F486015024B3300D7DC4A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 247F485D15024B2900D7DC4A /* SystemConfiguration.framework */; };
+		247F48641502516F00D7DC4A /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 247F48631502516F00D7DC4A /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +67,9 @@
 		2429E8E714F444A2009662F3 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		247133C514F44BA800576686 /* MapViewAnnotaion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewAnnotaion.h; sourceTree = "<group>"; };
 		247133C614F44BA800576686 /* MapViewAnnotaion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewAnnotaion.m; sourceTree = "<group>"; };
+		247F485D15024B2900D7DC4A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		247F48621502516F00D7DC4A /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		247F48631502516F00D7DC4A /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				247F486015024B3300D7DC4A /* SystemConfiguration.framework in Frameworks */,
 				2429E8EA14F4457B009662F3 /* CoreLocation.framework in Frameworks */,
 				2429E8E914F44572009662F3 /* MapKit.framework in Frameworks */,
 				2429E8A814F43E10009662F3 /* UIKit.framework in Frameworks */,
@@ -115,6 +121,7 @@
 		2429E8A614F43E10009662F3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				247F485D15024B2900D7DC4A /* SystemConfiguration.framework */,
 				2429E8E714F444A2009662F3 /* MapKit.framework */,
 				2429E8E514F44372009662F3 /* CoreLocation.framework */,
 				2429E8A714F43E10009662F3 /* UIKit.framework */,
@@ -128,6 +135,7 @@
 		2429E8AD14F43E10009662F3 /* WisercatApp */ = {
 			isa = PBXGroup;
 			children = (
+				247F48611502514900D7DC4A /* Helper Classes */,
 				247133C914F44BAB00576686 /* Objects */,
 				2429E8E114F4406E009662F3 /* DelegateAndSettings */,
 				2429E8E014F4404A009662F3 /* Views */,
@@ -204,6 +212,15 @@
 				247133C614F44BA800576686 /* MapViewAnnotaion.m */,
 			);
 			name = Objects;
+			sourceTree = "<group>";
+		};
+		247F48611502514900D7DC4A /* Helper Classes */ = {
+			isa = PBXGroup;
+			children = (
+				247F48621502516F00D7DC4A /* Reachability.h */,
+				247F48631502516F00D7DC4A /* Reachability.m */,
+			);
+			name = "Helper Classes";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -319,6 +336,7 @@
 				2429E8DE14F4402F009662F3 /* MainScreenViewController.m in Sources */,
 				2429E8E414F441A1009662F3 /* GoogleMapViewController.m in Sources */,
 				247133C714F44BA800576686 /* MapViewAnnotaion.m in Sources */,
+				247F48641502516F00D7DC4A /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
