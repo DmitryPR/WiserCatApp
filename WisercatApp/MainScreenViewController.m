@@ -131,7 +131,7 @@ NSXMLParserDelegate> {
     self.xmlData = [[NSMutableData alloc] init];
     [self.xmlData appendData:data];
 }
-
+    
 #pragma mark NSURLConnectionDelegate 
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
@@ -206,7 +206,8 @@ NSXMLParserDelegate> {
 
 -(void)processTheParsedInformation:(NSNotification *)notification {
     if ([[notification name] isEqualToString:@"ParsingDidSucceed"]) {
-        self.cityNameTextField.text = [self.currentPlace locality];
+        NSString *currentCityName = [self.currentPlace locality];
+        self.cityNameTextField.text = currentCityName;
         
     }
 }
@@ -224,6 +225,7 @@ NSXMLParserDelegate> {
     [self.locationMagaer setDistanceFilter:kCLDistanceFilterNone];
     [self.locationMagaer setDesiredAccuracy:kCLLocationAccuracyBest];
     [self.locationMagaer setDelegate:self];
+    [self.locationMagaer startUpdatingLocation];
     self.isUpdatingLocations = NO;
    
     
