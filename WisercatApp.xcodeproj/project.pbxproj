@@ -392,8 +392,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Dmitry Preobrazhenskiy (2FDGRCT5FY)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dmitry Preobrazhenskiy (2FDGRCT5FY)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -408,6 +408,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PROVISIONING_PROFILE = "E21DF007-89DD-4A16-A85D-348BC7AE2CA2";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E21DF007-89DD-4A16-A85D-348BC7AE2CA2";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -418,8 +420,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Dmitry Preobrazhenskiy (2FDGRCT5FY)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dmitry Preobrazhenskiy (2FDGRCT5FY)";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -428,6 +430,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "E21DF007-89DD-4A16-A85D-348BC7AE2CA2";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E21DF007-89DD-4A16-A85D-348BC7AE2CA2";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -436,14 +440,14 @@
 		2429E8D714F43E10009662F3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Dmitry Preobrazhenskiy (AC9D6RVJ79)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dmitry Preobrazhenskiy (AC9D6RVJ79)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Dmitry Preobrazhenskiy (2FDGRCT5FY)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dmitry Preobrazhenskiy (2FDGRCT5FY)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WisercatApp/WisercatApp-Prefix.pch";
 				INFOPLIST_FILE = "WisercatApp/WisercatApp-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "A83FE2B9-4B40-4B52-B333-29EBD1822094";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "83357FEF-2E56-4E9D-BF61-FFE414D04B85";
+				PROVISIONING_PROFILE = "E21DF007-89DD-4A16-A85D-348BC7AE2CA2";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E21DF007-89DD-4A16-A85D-348BC7AE2CA2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -451,14 +455,14 @@
 		2429E8D814F43E10009662F3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Dmitry Preobrazhenskiy (AC9D6RVJ79)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dmitry Preobrazhenskiy (AC9D6RVJ79)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Dmitry Preobrazhenskiy (2FDGRCT5FY)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dmitry Preobrazhenskiy (2FDGRCT5FY)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WisercatApp/WisercatApp-Prefix.pch";
 				INFOPLIST_FILE = "WisercatApp/WisercatApp-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "A83FE2B9-4B40-4B52-B333-29EBD1822094";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "83357FEF-2E56-4E9D-BF61-FFE414D04B85";
+				PROVISIONING_PROFILE = "E21DF007-89DD-4A16-A85D-348BC7AE2CA2";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E21DF007-89DD-4A16-A85D-348BC7AE2CA2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

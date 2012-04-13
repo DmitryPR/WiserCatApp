@@ -16,6 +16,10 @@
 #define COORDINATE_LOCALTIME @"localtime"
 
 
+
+#define PARSINGTIMEZONE @"parsingTimeZone"
+#define PARSINGLOCALTIME @"parsingLocalTime"
+
 @interface MainScreenViewController : UIViewController 
 @property (weak, nonatomic) IBOutlet UITextField *cityNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *timezoneTextField;

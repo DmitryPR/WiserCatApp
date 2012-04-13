@@ -41,6 +41,7 @@ NSXMLParserDelegate> {
 @property (nonatomic, strong) Reachability *hostReachability;
 @property (nonatomic) BOOL isInternetActive;
 @property (nonatomic) BOOL isHostReachable;
+@property (nonatomic, strong) NSMutableDictionary *parsingDictionary;
 @end
 @implementation MainScreenViewController
 @synthesize cityNameTextField = _cityNameTextField;
@@ -60,6 +61,7 @@ NSXMLParserDelegate> {
 @synthesize hostReachability = _hostReachability;
 @synthesize isInternetActive = _isInternetActive;
 @synthesize isHostReachable = _isHostReachable;
+@synthesize parsingDictionary = _parsingDictionary;
 #pragma mark - Location Delegate 
 //Making a new loactionManager here which allows to reverse the geocode in order to get the required information
 -(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
@@ -68,42 +70,35 @@ NSXMLParserDelegate> {
     //For testing added the information to the label bellow
     NSString *locationString = [NSString stringWithFormat:@"%@", self.currentLocation];
     self.locationLabel.text = locationString;
-     NSLog(@"%@", self.currentLocation);
-    //
-    
-   
-    CLGeocoder *geoCoder = [CLGeocoder new];
-    [geoCoder reverseGeocodeLocation:self.currentLocation completionHandler:^(NSArray *placemarks, NSError *error) {
-        for (CLPlacemark * placemark in placemarks){
-            //Get the current placemark to get the locality after
-            self.currentPlace = [[CLPlacemark alloc] initWithPlacemark:placemark];
-        }
-    }];
+    NSLog(@"%@", self.currentLocation);
     [self.locationMagaer stopUpdatingLocation];
-     
+    self.isUpdatingLocations = NO;
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"LocationUpdated" object:nil];
+    
 }
 
 #pragma mark - Text Field Delegate
 
--(BOOL)textFieldShouldReturn:(UITextField *)textField {
-    //Text field keyboard hiding after the user presses done.
-    [textField resignFirstResponder];
-    return YES;
+
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    return NO;
 }
+
 #pragma mark - IBActions
 
 - (IBAction)gpsCoordinatesButtonPressed:(id)sender {
     if (!self.isUpdatingLocations) {
+        self.isUpdatingLocations = YES;
         [self.locationMagaer startUpdatingLocation];
     }
     //Adding some time here for a better result.
-    if (!self.isInternetActive) {
+    if (self.isInternetActive & self.isHostReachable) {
+        [self performSelector:@selector(initiateURLConnection) withObject:nil afterDelay:0.5]; 
+    }
+    else  {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"The Internet connection is down. Please try again later..." delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil];
         [alertView show];
         return;
-    }
-    else {
-        [self performSelector:@selector(initiateURLConnection) withObject:nil afterDelay:0.5];
     }
     
 }
@@ -153,23 +148,28 @@ NSXMLParserDelegate> {
     self.xmlData = [[NSMutableData alloc] init];
     [self.xmlData appendData:data];
 }
-    
+
 #pragma mark NSURLConnectionDelegate 
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    NSLog(@"Connection failed");
-}
-
-- (void)connection:(NSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {
-    NSLog(@"Connection is set");
-    
+    UIAlertView *uiav = [[UIAlertView alloc] initWithTitle:@"" message:@"Can't connect to the server" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil];
+    [uiav show];
 }
 
 #pragma mark - NSXMLParserDelegate 
+-(void)parserDidStartDocument:(NSXMLParser *)parser {
+    self.parsingDictionary = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
+                              self.timezoneString,
+                              PARSINGTIMEZONE,
+                              self.localTimeString,
+                              PARSINGLOCALTIME,
+                              nil];
+}
+
 -(void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict {
     if ([elementName isEqualToString:@"offset"]) {
         //When the required is found we initialize a new string
-         self.timezoneString= [[NSMutableString alloc] init];
+        self.timezoneString= [[NSMutableString alloc] init];
     }
     else if ([elementName isEqualToString:@"localtime"]) {
         self.localTimeString = [[NSMutableString alloc] init];
@@ -180,51 +180,68 @@ NSXMLParserDelegate> {
     //checking if the string if not nil and appending the information to it and to the text field
     if (self.timezoneString != nil) {
         [self.timezoneString appendString:string];
-         self.timezoneTextField.text = self.timezoneString;
+        
     }
     else if (self.localTimeString != nil) {
         [self.localTimeString appendString:string];
-        self.localTimeTextField.text = self.localTimeString;
+       
     }
 }
 
 -(void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
     //String to nil in order to clear it
     if ([elementName isEqualToString:@"offset"]) {
-         self.timezoneString= nil;
+        [self.parsingDictionary setObject:self.timezoneString forKey:PARSINGTIMEZONE];
+        self.timezoneString= nil;
     }
     
     else if ([elementName isEqualToString:@"localtime"]) {
-         self.localTimeString = nil; 
+        [self.parsingDictionary setObject:self.localTimeString forKey:PARSINGLOCALTIME];
+        self.localTimeString = nil; 
     }
 }
 -(void)parserDidEndDocument:(NSXMLParser *)parser {
-   //Additional notification that the parsing was successfully finished
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"ParsingDidSucceed" object:self];
-  
+    //Additional notification that the parsing was successfully finished
+    NSString *timeZoneString = [self.parsingDictionary objectForKey:PARSINGTIMEZONE];
+    NSString *localTimeString = [self.parsingDictionary objectForKey:PARSINGLOCALTIME];
+    if ((timeZoneString != nil) & (localTimeString != nil)) {
+        self.timezoneTextField.text = timeZoneString;
+        self.localTimeTextField.text = localTimeString;
+    }
+    self.parsingDictionary = nil;
+    
 }
 
 #pragma mark - Methods 
 -(void)initiateURLConnection{
-  
-    NSString *connectionLatitude = [[NSString alloc] initWithFormat:@"%g", self.currentLocation.coordinate.latitude];
-    NSString *connectionLongitude = [[NSString alloc] initWithFormat:@"%g", self.currentLocation.coordinate.longitude];
+    
+    NSString *connectionLatitude = [[NSString alloc] initWithFormat:@"%f", self.currentLocation.coordinate.latitude];
+    NSString *connectionLongitude = [[NSString alloc] initWithFormat:@"%f", self.currentLocation.coordinate.longitude];
     
     //Testing the outgoing data
     NSLog(@"latitude is %@", connectionLatitude);
     NSLog(@"longitude is %@", connectionLongitude);
     //
     
-    NSMutableString *connectionString = [NSMutableString stringWithFormat:@"http://www.earthtools.org/timezone/%@/%@", connectionLatitude, connectionLongitude];
     
-    //Logging the string to see that it is correct
-    NSLog(@"connection string is %@", connectionString);
-    //
+    if (!(([connectionLatitude isEqualToString:@""]) & [connectionLongitude isEqualToString:@""])) {
+        NSMutableString *connectionString = [NSMutableString stringWithFormat:@"http://www.earthtools.org/timezone/%@/%@", connectionLatitude, connectionLongitude];
+        
+        //Logging the string to see that it is correct
+        NSLog(@"connection string is %@", connectionString);
+        //
+        NSURL *url = [NSURL URLWithString:connectionString];
+        NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
+        NSURLConnection *connection = [NSURLConnection connectionWithRequest:request delegate:self];
+        [connection scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
+        [connection start];
+    }
     
-    NSURL *url = [NSURL URLWithString:connectionString];
-    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
-    NSURLConnection *connection = [NSURLConnection connectionWithRequest:request delegate:self];
-    [connection start];
+}
+
+-(void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {
+    UIAlertView *uiav = [[UIAlertView alloc] initWithTitle:@"" message:@"Can't get the current timezone and current time" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil];
+    [uiav show];
 }
 
 #pragma mark - Notifications
@@ -255,7 +272,7 @@ NSXMLParserDelegate> {
                 
                 break;
             }
-    }
+        }
         NetworkStatus hostStatus = [self.hostReachability currentReachabilityStatus];
         switch (hostStatus)
         {
@@ -284,16 +301,25 @@ NSXMLParserDelegate> {
 }
 
 -(void)processTheParsedInformation:(NSNotification *)notification {
-    if ([[notification name] isEqualToString:@"ParsingDidSucceed"]) {
-        NSString *currentCityName = [self.currentPlace locality];
-        self.cityNameTextField.text = currentCityName;
+    if ([[notification name] isEqualToString:@"LocationUpdated"]) {
+        CLGeocoder *geoCoder = [CLGeocoder new];
+        [geoCoder reverseGeocodeLocation:self.currentLocation completionHandler:^(NSArray *placemarks, NSError *error) {
+            for (CLPlacemark * placemark in placemarks){
+                //Get the current placemark to get the locality after
+                self.currentPlace = [[CLPlacemark alloc] initWithPlacemark:placemark];
+            }
+        }];
+        if (self.currentPlace != nil) {
+            NSString *currentCityName = [self.currentPlace locality];
+            self.cityNameTextField.text = currentCityName;
+        }
+     
         
     }
 }
 #pragma mark - System Stuff
 -(void)viewDidLoad {
     [super viewDidLoad];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(processTheParsedInformation:) name:@"ParsingDidSucceed" object:nil];
     self.coordinateDictionary = [[NSMutableDictionary alloc] init];
     self.annotaionsArray = [[NSMutableArray alloc] init];
     self.currentLocation = [[CLLocation alloc] init];
@@ -304,13 +330,16 @@ NSXMLParserDelegate> {
     [self.locationMagaer setDistanceFilter:kCLDistanceFilterNone];
     [self.locationMagaer setDesiredAccuracy:kCLLocationAccuracyBest];
     [self.locationMagaer setDelegate:self];
-    [self.locationMagaer startUpdatingLocation];
     self.isUpdatingLocations = NO;
-   
+    
     
 }
 
--(void)viewWillAppear:(BOOL)animated {
+
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:YES];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(processTheParsedInformation:) name:@"LocationUpdated" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkNetworkStatus:) name:kReachabilityChangedNotification object:nil];
     
     self.internetReachibility = [Reachability reachabilityForInternetConnection];
@@ -319,12 +348,16 @@ NSXMLParserDelegate> {
     // check if a pathway to a random host exists
     self.hostReachability = [Reachability reachabilityWithHostName:@"www.earthtools.org"];
     [self.hostReachability startNotifier];
+    
 }
 
--(void)viewWillDisappear:(BOOL)animated {
-      [[NSNotificationCenter defaultCenter] removeObserver:self];
+-(void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:YES];
+    [self.internetReachibility stopNotifier];
+    [self.hostReachability stopNotifier];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"LocationUpdated" object:nil];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:kReachabilityChangedNotification object:nil];
 }
-
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier hasPrefix:@"ShowGoogleMap"]) {
@@ -334,13 +367,11 @@ NSXMLParserDelegate> {
     }
 }
 - (void)viewDidUnload {
-    [[NSNotificationCenter defaultCenter]removeObserver:self];
+    
     [self setCityNameTextField:nil];
     [self setTimezoneTextField:nil];
     [self setLocalTimeTextField:nil];
     [super viewDidUnload];
-    [self.locationMagaer stopUpdatingLocation];
-    
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
